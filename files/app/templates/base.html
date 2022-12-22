@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>UNES - {% block titulo %}{% endblock %}</title>
+    <link rel="stylesheet" href="../static/css/styles.css">
+</head>
+<body id="body">
+    <header class="header">
+        <img src="../static/img/logo.png" alt="Logo da home">
+        <nav>
+            <ul class="menu">
+                <li><a href="home">Home</a></li>
+                <li><a href="quem-somos">Quem Somos</a></li>
+                <li><a href="contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block conteudo %}{% endblock %}
+    <p class="direito"><b>Todos os direitos reservados</b></p>
+    <script type="text/javascript" src="../static/js/scripts.js"></script>
+</body>    
+</html>
