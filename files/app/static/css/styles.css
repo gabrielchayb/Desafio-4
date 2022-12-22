@@ -1,0 +1,73 @@
+body, ul, li, p {
+    margin: 0px;
+    padding: 0px;
+    font-size: 1.2rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {        
+    max-width: 900px;
+    margin: 5px auto; /* MARGEM SUPERIOR DEVIDO A LINHA DO BACKGROUND */
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 100px;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.header {
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;    
+    align-items: center;
+    padding: 21px 20px; /* PADDING DE ACORDO COM O MARGIN DO BODY */
+    margin: 0px auto;  
+}
+
+.header img {
+    display: block;
+    margin: 0px;
+    padding: 0px;
+}
+
+.header ul {
+    list-style: none;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu li {
+    margin-left: 10px;
+}
+
+.menu li a {
+    white-space: nowrap; /* Cancela a quebra de texto da lista do menu. Ex: "Quem somos" */
+    display: block;
+    margin: auto;
+    padding: 10px;
+}
+
+.capa {    
+    display: block;
+    margin: 0px auto;    
+}
+
+textarea {
+    resize: none;
+}
+
+.direito {
+    text-align: center;
+}
