@@ -2,12 +2,12 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Users</title>
+  <title>Solicitações</title>
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.css">  
   <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
-<table id="users" class="display">
+<table id="requestsDetails" class="display">
     <thead>
         <tr>
             <th>E-mail</th>
@@ -16,11 +16,11 @@
         </tr>
     </thead>
     <tbody>
-        {% for user in userDetails %}   
+        {% for detail in requestsDetails %}   
         <tr>
-            <td>{{user[0]}}</td>
-            <td>{{user[1]}}</td>
-            <td>{{user[2]}}</td>
+            <td>{{detail[1]}}</td>
+            <td>{{detail[2]}}</td>
+            <td>{{detail[3]}}</td>
         </tr>
         {% endfor %}
     </tbody>    
@@ -30,7 +30,7 @@
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.js"></script>
 <script>
     $(document).ready(function(){
-        $('#users').DataTable({
+        $('#requestsDetails').DataTable({
             "language": {
                 "lengthMenu": "Mostrando _MENU_ registros por página",
                 "zeroRecords": "Nada encontrado",

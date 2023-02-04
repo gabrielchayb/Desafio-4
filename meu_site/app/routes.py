@@ -3,10 +3,10 @@ from flask import Flask, render_template, request, url_for, jsonify
 from flask_mysqldb import MySQL
 
 # conexão com o banco de dados
-app.config['MYSQL_Host'] = 'localhost' # 127.0.0.1
+app.config['MYSQL_HOST'] = 'localhost' # 127.0.0.1
 app.config['MYSQL_USER'] = 'luis'
-app.config['MYSQL_PASSWORD'] = '5563'
-app.config['MYSQL_DB'] = 'contatos'
+app.config['MYSQL_PASSWORD'] = '123'
+app.config['MYSQL_DB'] = 'historico'
 
 mysql = MySQL(app)
 
@@ -21,7 +21,6 @@ def quemSomos():
 
 @app.route('/contato', methods=['GET','POST'])
 def contato():
-    x = request.args.get
     if request.method == "POST":
         email = request.form.get('email')
         subject = request.form.get('subject')
@@ -40,9 +39,9 @@ def contato():
 def users():
     cur = mysql.connection.cursor()
 
-    users = cur.execute("SELECT * FROM contatos")
+    requests = cur.execute("SELECT * FROM contatos")
 
-    if users > 0:
-        userDetails = cur.fetchall()
+    if requests > 0:
+        requestsDetails = cur.fetchall()
 
-        return render_template("users.html", userDetails=userDetails)
+        return render_template("users.html", requestsDetails=requestsDetails)
