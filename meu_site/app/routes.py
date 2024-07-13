@@ -1,14 +1,24 @@
-from app import app
-from flask import Flask, render_template, request, url_for, jsonify
-from flask_mysqldb import MySQL
+from flask import Flask, render_template, request, jsonify
+import pymysql
 
-# conexão com o banco de dados
-app.config['MYSQL_HOST'] = 'localhost' # 127.0.0.1
-app.config['MYSQL_USER'] = 'luis'
-app.config['MYSQL_PASSWORD'] = '123'
-app.config['MYSQL_DB'] = 'historico'
+app = Flask(__name__)
+app.config['SECRET_KEY'] = 'supersecretkey'
 
-mysql = MySQL(app)
+# Configuração do MySQL
+db_host = 'localhost'
+db_user = 'gabriel'
+db_password = 'Jupiter1?'
+db_name = 'mydatabase'
+
+def get_db_connection():
+    connection = pymysql.connect(
+        host=db_host,
+        user=db_user,
+        password=db_password,
+        db=db_name,
+        cursorclass=pymysql.cursors.DictCursor
+    )
+    return connection
 
 @app.route('/', methods=['GET','POST'])
 @app.route('/home', methods=['GET','POST'])
@@ -26,10 +36,13 @@ def contato():
         subject = request.form.get('subject')
         description = request.form.get('description')
         
-        cur = mysql.connection.cursor()
-        cur.execute("INSERT INTO contatos(email, nome, assunto) VALUES (%s, %s, %s)", (email, subject, description))       
-        mysql.connection.commit()        
-        cur.close()
+        connection = get_db_connection()
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("INSERT INTO contatos (email, nome, assunto) VALUES (%s, %s, %s)", (email, subject, description))
+            connection.commit()
+        finally:
+            connection.close()
 
         return 'sucesso'
     return render_template('contato.html')
@@ -37,11 +50,15 @@ def contato():
 # rota usuários para listar todos os usuário no banco de dados.
 @app.route('/users')
 def users():
-    cur = mysql.connection.cursor()
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute("SELECT * FROM contatos")
+            requestsDetails = cursor.fetchall()
+    finally:
+        connection.close()
 
-    requests = cur.execute("SELECT * FROM contatos")
+    return render_template("users.html", requestsDetails=requestsDetails)
 
-    if requests > 0:
-        requestsDetails = cur.fetchall()
-
-        return render_template("users.html", requestsDetails=requestsDetails)
+if __name__ == '__main__':
+    app.run(debug=True)
